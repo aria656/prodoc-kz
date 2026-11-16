@@ -360,7 +360,7 @@ function draw(){
         var cls=(b.a==='r'?'r':b.a==='c'?'c':b.a==='j'?'j':'')+(b.b?' b':'');
         return '<p class="'+cls+'">'+esc(b.t).replace(/(\[[^\]]*\])/g,'<span class="ph">$1</span>')+'</p>';
       }).join('')+'</div></div>'+
-      '<div class="actions"><button class="btn ghost" id="back">Изменить данные</button><div class="row grow"><button class="btn" id="dl-docx">Скачать DOCX</button><button class="btn ghost" id="dl-txt">Скачать TXT</button><button class="btn ghost" id="copy">Копировать текст</button></div></div></div>'+
+      '<section class="checklist noprint"><h3>Перед подачей</h3><ul><li>Проверьте адресата, Ф. И. О., номер дела и дату.</li><li>Замените места в квадратных скобках своими данными.</li><li>Подпишите документ собственноручно.</li><li>Сделайте копию и попросите отметку о принятии: если документ передан лично, дату определяют по отметке канцелярии или должностного лица (ст. 49 УПК РК).</li><li>Если отправляете почтой, сдайте до конца срока и сохраните квитанцию: дата определяется по почтовому штемпелю (ст. 49 УПК РК).</li><li>Покажите документ юристу или в юридической консультации.</li></ul><p class="small"><a href="sroki.html">Проверить срок в калькуляторе</a></p></section>'+'<div class="actions noprint"><button class="btn ghost" id="back">Изменить данные</button><div class="row grow"><button class="btn" id="dl-docx">Скачать DOCX</button><button class="btn ghost" id="dl-txt">Скачать TXT</button><button class="btn ghost" id="copy">Копировать текст</button><button class="btn ghost" id="print">Печать / PDF</button></div></div></div>'+
       '<p class="notice" style="margin-top:16px"><strong>Проверьте документ перед подачей.</strong> Это учебный проект студентов, авторы не являются юристами. Покажите документ юристу или в юридической консультации.</p>';
   }
   root.innerHTML=html;bind();
@@ -391,6 +391,7 @@ function bind(){
   }
   var b=$('#back');if(b)b.addEventListener('click',function(){go(S.step-1);});
   var c=$('#copy');if(c)c.addEventListener('click',copyText);
+  var pr=$('#print');if(pr)pr.addEventListener('click',function(){try{window.print();}catch(e){toast('Не удалось открыть печать. Скачайте DOCX.');}});
   var x=$('#dl-docx');if(x)x.addEventListener('click',function(){save('docx');});
   var t=$('#dl-txt');if(t)t.addEventListener('click',function(){save('txt');});
 }

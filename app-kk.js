@@ -370,7 +370,7 @@ function draw(){
         var cls=(b.a==='r'?'r':b.a==='c'?'c':b.a==='j'?'j':'')+(b.b?' b':'');
         return '<p class="'+cls+'">'+esc(b.t).replace(/(\[[^\]]*\])/g,'<span class="ph">$1</span>')+'</p>';
       }).join('')+'</div></div>'+
-      '<div class="actions"><button class="btn ghost" id="back">Деректерді өзгерту</button><div class="row grow"><button class="btn" id="dl-docx">DOCX жүктеу</button><button class="btn ghost" id="dl-txt">TXT жүктеу</button><button class="btn ghost" id="copy">Мәтінді көшіру</button></div></div></div>'+
+      '<section class="checklist noprint"><h3>Тапсырар алдында</h3><ul><li>Адресатты, Т. А. Ә., іс нөмірін және күнді тексеріңіз.</li><li>Төртбұрышты жақшадағы орындарды өз деректеріңізбен ауыстырыңыз.</li><li>Құжатқа өз қолыңызбен қол қойыңыз.</li><li>Көшірмесін жасап, қабылданғаны туралы белгі қойдырыңыз: құжатты жеке тапсырсаңыз, күні кеңсенің немесе лауазымды адамның белгісі бойынша анықталады (ҚР ҚПК-нің 49-бабы).</li><li>Поштамен жіберсеңіз, мерзім аяқталғанға дейін тапсырып, түбіртекті сақтаңыз: күні пошта штемпелі бойынша анықталады (ҚР ҚПК-нің 49-бабы).</li><li>Құжатты заңгерге немесе заң консультациясына көрсетіңіз.</li></ul><p class="small"><a href="kk-sroki.html">Мерзімді калькуляторда тексеру</a></p></section>'+'<div class="actions noprint"><button class="btn ghost" id="back">Деректерді өзгерту</button><div class="row grow"><button class="btn" id="dl-docx">DOCX жүктеу</button><button class="btn ghost" id="dl-txt">TXT жүктеу</button><button class="btn ghost" id="copy">Мәтінді көшіру</button><button class="btn ghost" id="print">Басып шығару / PDF</button></div></div></div>'+
       '<p class="notice" style="margin-top:16px"><strong>Құжатты тапсырар алдында тексеріңіз.</strong> Бұл студенттердің оқу жобасы, авторлар заңгер емес. Құжатты заңгерге немесе заң консультациясына көрсетіңіз. Қазақ тіліндегі мәтінді тіл маманы тексермеген.</p>';
   }
   root.innerHTML=html;bind();
@@ -401,6 +401,7 @@ function bind(){
   }
   var b=$('#back');if(b)b.addEventListener('click',function(){go(S.step-1);});
   var c=$('#copy');if(c)c.addEventListener('click',copyText);
+  var pr=$('#print');if(pr)pr.addEventListener('click',function(){try{window.print();}catch(e){toast('Басып шығаруды ашу мүмкін болмады. DOCX жүктеңіз.');}});
   var x=$('#dl-docx');if(x)x.addEventListener('click',function(){save('docx');});
   var t=$('#dl-txt');if(t)t.addEventListener('click',function(){save('txt');});
 }
