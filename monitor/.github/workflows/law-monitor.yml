@@ -1,0 +1,31 @@
+name: Проверка законов
+on:
+  schedule:
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Проверить статьи
+        run: python3 monitor/check_law.py
+      - name: Сохранить эталон
+        run: |
+          git config user.name "law-monitor"
+          git config user.email "law-monitor@users.noreply.github.com"
+          git add monitor/baseline.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Обновлён эталон статей"
+            git push
+          fi
+      - name: Сообщить об изменениях
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f report.md ]; then
+            gh issue create --title "Проверка законов: $(date +%Y-%m-%d)" --body-file report.md
+          fi
