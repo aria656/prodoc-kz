@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aria656.github.io/prodoc-kz/sitemap.xml
+Sitemap: https://prodoc-kz.github.io/prodoc-kz/sitemap.xml
